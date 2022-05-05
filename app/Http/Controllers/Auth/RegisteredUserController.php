@@ -35,10 +35,11 @@ class RegisteredUserController extends Controller
     {
         $request->validate([
             'name' => ['required', 'string', 'max:255'],
-            'phone' => ['required', 'string', 'regex:/^([9])([7])([3])([0-9\s\-\+\(\)]*)$/','min:11'],
+            'phone' => ['required', 'string'],
             'city' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
+            'birthday' => ['required'],
         ]);
         
         $user = User::create([
@@ -46,6 +47,7 @@ class RegisteredUserController extends Controller
             'email' => $request->email,
             'phone' => $request->phone,
             'city' => $request->city,
+            'birthday' => $request->birthday,
             'password' => Hash::make($request->password),
         ]);
 

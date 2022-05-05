@@ -16,11 +16,10 @@ return new class extends Migration
         Schema::create('projects', function (Blueprint $table) {
             $table->id();
             $table->string('name')->unique();
-            $table->string('description')->nullable();
+            $table->text('description')->nullable();
             $table->string('period')->nullable();
             $table->Date('start_date')->nullable();
-            $table->unsignedBigInteger('owner_id')->nullable();
-            $table->foreign('owner_id')->references('id')->on('users')->cascadeOnDelete();
+            $table->string('owner')->nullable();
             $table->timestamps();
         });
     }

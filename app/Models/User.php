@@ -23,9 +23,12 @@ class User extends Authenticatable
         'email',
         'password',
         'phone',
+        'birthday',
+        'address',
+        'cv',
         'city',
         'status',
-        'image'
+        'gender'
     ];
     /**
      * The attributes that should be hidden for serialization.
@@ -46,11 +49,19 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    /**
-     * Get the items for the blog user.
+     /**
+     * The Announcement that belong to the User.
      */
-    public function items()
+    public function announcements()
     {
-        return $this->hasMany(Item::class);
+        return $this->belongsToMany(Announcement::class)->select(array('announcements.id'));;
+    }
+
+    /**
+     * The Qualification that belong to the user.
+     */
+    public function qualifications()
+    {
+        return $this->belongsToMany(Qualification::class);
     }
 }

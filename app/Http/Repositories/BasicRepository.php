@@ -8,7 +8,7 @@ class BasicRepository implements BasicRepositoryInterface
 {
     public function getAll($model) 
     {
-        return $model::all();
+        return $model::latest()->paginate(10);
     }
 
     public function getById($model, $id) 

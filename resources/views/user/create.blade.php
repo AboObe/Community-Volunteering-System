@@ -1,4 +1,4 @@
-@extends('layouts.finder_app')
+@extends('layouts.community_volunteering_app')
 @section('content')
 
 
@@ -60,7 +60,7 @@
                             @endif
                     </div>
                     <div class="form-group">
-                        <label for="phone">Phone <small>973 XXXX XXXX</small>:</label>
+                        <label for="phone">Phone :</label>
                         <input type="text" class="form-control form-control-border" id="phone" name="phone" placeholder="phone">
                         @if($errors->has('phone'))
                         <span class="text-danger"><small>{{$errors->first('phone')}}</small>

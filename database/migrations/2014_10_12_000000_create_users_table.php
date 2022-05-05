@@ -18,14 +18,15 @@ return new class extends Migration
             $table->string('name');
             $table->string('email')->unique();
             $table->string('phone');
-            $table->date('birthday');
-            $table->string('address');
+            $table->date('birthday')->nullable();
+            $table->string('address')->nullable();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->string('cv')->nullable();
+            $table->string('image')->default('dist/img/avatar.png');
             $table->string('city');
             $table->enum('status',['active','inactive'])->default('active');
-            $table->enum('gender',['male','female']);
+            $table->enum('gender',['male','female'])->nullable();
             $table->rememberToken();
             $table->timestamps();
         });

@@ -13,10 +13,10 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('volunteer__qualifications', function (Blueprint $table) {
+        Schema::create('qualification_user', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('volunteer_id')->nullable();
-            $table->foreign('volunteer_id')->references('id')->on('users')->cascadeOnDelete();
+            $table->unsignedBigInteger('user_id')->nullable();
+            $table->foreign('user_id')->references('id')->on('users')->cascadeOnDelete();
             $table->unsignedBigInteger('qualification_id')->nullable();
             $table->foreign('qualification_id')->references('id')->on('qualifications')->cascadeOnDelete();
             

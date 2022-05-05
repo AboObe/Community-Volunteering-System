@@ -1,4 +1,4 @@
-@extends('layouts.finder_app')
+@extends('layouts.community_volunteering_app')
 @section('content')
 
 
@@ -22,96 +22,216 @@
     </section>
 
     <!-- /.card-header -->
-    <div class="card-body">
-        <div class="card card-primary">
-            <div class="card-header">
-                <h3 class="card-title">New User</h3>
-            </div>
-            <!-- /.card-header -->
-            <div class="card-body">
+    <section class="content ">
+    <!-- Default box -->
+    <div class="card-body card">
+        <div class="card card-primary card-outline">
+            <div class="card-body box-profile">
+                <div class="text-center">
+                    <img class="profile-user-img img-fluid img-circle" src="{{asset($user->image)}}" alt="User profile picture">
+                </div>
+
+                <h3 class="profile-username text-center">{{$user->name}}</h3>
+
+                <p class="text-muted text-center">{{$user->email}}</p>
                 <form method="POST" action="{{ route('users.update', $user->id) }}" data-parsley-validate novalidate enctype="multipart/form-data">
                     <input type="hidden" name="_method" value="PATCH">
                     <input type="hidden" name="_token" value="{{ csrf_token() }}">
-                    <div class="form-group">
-                        <label for="name">Name</label>
-                        <input type="text" class="form-control form-control-border" id="name" name="name" placeholder="name" value={{$user->name}}>
-                        @if($errors->has('name'))
-                        <span class="text-danger"><small>{{$errors->first('name')}}</small>
+
+
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <b>Name</b>
+                            <input type="text" class="form-control form-control-border" id="name" name="name" placeholder="name" value="{{$user->name}}">
+                            @if($errors->has('name'))
+                            <span class="text-danger"><small>{{$errors->first('name')}}</small></span>
                             @endif
-                    </div>
-                    <div class="form-group">
-                        <label for="email">Email</label>
-                        <input type="email" class="form-control form-control-border" id="email" name="email" placeholder="email" value={{$user->email}}>
-                        @if($errors->has('email'))
-                        <span class="text-danger"><small>{{$errors->first('email')}}</small>
-                            @endif
-                    </div>
-                    <div class="form-group">
-                        <label for="password">Password</label>
-                        <input type="password" class="form-control form-control-border" id="password" name="password" placeholder="password">
-                        @if($errors->has('password'))
-                        <span class="text-danger"><small>{{$errors->first('password')}}</small>
-                            @endif
-                    </div>
-                    <div class="form-group">
-                        <label for="city">City</label>
-                        <input type="text" class="form-control form-control-border" id="city" name="city" placeholder="city" value={{$user->city}}>
-                        @if($errors->has('city'))
-                        <span class="text-danger"><small>{{$errors->first('city')}}</small>
-                            @endif
-                    </div>
-                    <div class="form-group">
-                        <label for="phone">Phone <small>973 XXXX XXXX</small>:</label>
-                        <input type="text" class="form-control form-control-border" id="phone" name="phone" placeholder="phone" value={{$user->phone}}>
-                        @if($errors->has('phone'))
-                        <span class="text-danger"><small>{{$errors->first('phone')}}</small>
-                            @endif
-                    </div>
-
-
-
-                    <div class="form-group">
-                        <label>Role </label>
-                        <select class="form-control select2bs4 select2-hidden-accessible" style="width: 100%;" data-select2-id="17" tabindex="-1" aria-hidden="true" name="role" id="role">
-
-                            @foreach($roles as $role)
-                            <option value={{$role}} {{$userRole->name == $role?"selected" :""}}>{{$role}}</option>
-                            @endforeach
-                        </select>
-                    </div>
-
-
-
-                    <div class="form-group row">
-                    <div class="col-sm-6">
-                        <div class="filtr-item col-sm-2" data-category="1" data-sort="white sample" style="opacity: 1; transform: scale(1) translate3d(0px, 0px, 0px); backface-visibility: hidden; perspective: 1000px; transform-style: preserve-3d; position: absolute; width: 114.5px; transition: all 0.5s ease-out 0ms, width 1ms ease 0s;">
-                            <a href="{{asset($user->image)}}" data-toggle="lightbox" data-title="sample 1 - white" target="_blank">
-                                <img src="{{asset($user->image)}}" class="img-fluid mb-2" alt="white sample">
-                            </a>
                         </div>
-                    </div>
-                    <div class="col-sm-6">
 
-                        <label for="image">Profile Photo</label>
-                        <div class="custom-file">
-                            <input type="file" class="custom-file-input" id="image" name="image">
-                            <label class="custom-file-label" for="image">Choose file</label>
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <b>Phone:</b>
+                                <input type="text" class="form-control form-control-border" id="phone" name="phone" placeholder="phone" value="{{$user->phone}}">
+                                @if($errors->has('phone'))
+                                <span class="text-danger"><small>{{$errors->first('phone')}}</small></span>
+                                @endif
+                            </div>
                         </div>
-                        @if($errors->has('image'))
-                        <span class="text-danger"><small>{{$errors->first('image')}}</small>
-                            @endif
-                    </div>
-                    </div>
+
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <b>Email</b>
+                                <input type="email" class="form-control form-control-border" id="email" name="email" placeholder="email" value="{{$user->email}}">
+                                @if($errors->has('email'))
+                                <span class="text-danger"><small>{{$errors->first('email')}}</small></span>
+                                @endif
+                            </div>
+                        </div>
+
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <b>Password</b>
+                                <input type="password" class="form-control form-control-border" id="password" name="password" placeholder="password">
+                                @if($errors->has('password'))
+                                <span class="text-danger"><small>{{$errors->first('password')}}</small></span>
+                                @endif
+                            </div>
+
+                        </div>
+
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <b>City</b>
+                                <input type="text" class="form-control form-control-border" id="city" name="city" placeholder="city" value="{{$user->city}}">
+                                @if($errors->has('city'))
+                                <span class="text-danger"><small>{{$errors->first('city')}}</small></span>
+                                @endif
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <b>Address</b>
+                                <input type="text" class="form-control form-control-border" id="address" name="address" placeholder="address" value="{{$user->address}}">
+                                @if($errors->has('address'))
+                                <span class="text-danger"><small>{{$errors->first('address')}}</small></span>
+                                @endif
+                            </div>
+                        </div>
+
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <b>Birthday</b>
+                                <input type="date" class="form-control form-control-border" id="birthday" name="birthday" placeholder="address" value="{{$user->birthday}}">
+                                @if($errors->has('birthday'))
+                                <span class="text-danger"><small>{{$errors->first('birthday')}}</small></span>
+                                @endif
+                            </div>
+                        </div>
 
 
-                    <div class="card-footer  text-left">
-                        <button type="submit" class="btn btn-primary">Submit</button>
-                    </div>
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                @role("Admin")
+                                <b>Role</b>
+                                <select class="form-control select2bs4 select2-hidden-accessible" style="width: 100%;" data-select2-id="17" tabindex="-1" aria-hidden="true" name="role" id="role">
+
+                                    @foreach($roles as $role)
+                                    <option value={{$role}} {{$userRole->name == $role?"selected" :""}}>{{$role}}</option>
+                                    @endforeach
+                                </select>
+                                @endrole
+
+                                @role("Normal")
+                                <b>Role</b>
+                                <input type="text" class="form-control form-control-border" value="{{$userRole->name}}" Readonly>
+                                @endrole
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                @role("Admin")
+                                <b>Status</b>
+                                <select class="form-control select2bs4 select2-hidden-accessible" style="width: 100%;" data-select2-id="17" tabindex="-1" aria-hidden="true" name="status" id="status">
+
+
+                                    <option value='active' {{$user->status == "active"?"selected" :""}}>Active</option>
+                                    <option value='inactive' {{$user->status == "inactive"?"selected" :""}}>Inactive</option>
+
+                                </select>
+                                @endrole
+
+                                @role("Normal")
+                                <b>Status</b>
+                                <input type="text" class="form-control form-control-border" value="{{$user->status}}" Readonly>
+                                @endrole
+                            </div>
+                        </div>
+
+
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                @role("Admin")
+                                <b>Gender</b>
+                                <select class="form-control select2bs4 select2-hidden-accessible" style="width: 100%;" data-select2-id="17" tabindex="-1" aria-hidden="true" name="gender" id="gender">
+
+
+                                    <option value='male' {{$user->gender == "male"?"selected" :""}}>Male</option>
+                                    <option value='female' {{$user->gender == "female"?"selected" :""}}>Female</option>
+
+                                </select>
+                                @endrole
+
+                                @role("Normal")
+                                <b>Gender</b>
+                                <input type="text" class="form-control form-control-border" value="{{$user->gender}}" Readonly>
+                                @endrole
+                            </div>
+                        </div>
+
+                        <div class="col-sm-6">
+                            <div class="form-group">
+
+                                <b>Profile Photo</b>
+                                <div class="custom-file">
+                                    <input type="file" class="custom-file-input" id="image" name="image">
+                                    <label class="custom-file-label" for="image">Choose file</label>
+                                </div>
+                                @if($errors->has('image'))
+                                <span class="text-danger"><small>{{$errors->first('image')}}</small></span>
+                                @endif
+                            </div>
+                        </div>
+                        <div class="col-sm-2">
+                            <div class="form-group">
+
+                                <b>Current CV</b>
+                                <div class="custom-file">
+                                    @if($user->cv != "")
+                                    <object data="test.pdf" type="application/pdf" width="300" height="200">
+                                        <a href="../../{{$user->cv}}">{{$user->name}}.pdf</a>
+                                    </object>
+                                    @else
+                                    <a>Not Exist</a>
+                                    @endif
+                                </div>
+                                @if($errors->has('cv'))
+                                <span class="text-danger"><small>{{$errors->first('cv')}}</small></span>
+                                @endif
+                            </div>
+                        </div>
+
+                        <div class="col-sm-4">
+                            <div class="form-group">
+
+                                <b>Update CV</b>
+                                <div class="custom-file">
+                                    <input type="file" class="custom-file-input" id="cv" name="cv">
+                                    <label class="custom-file-label" for="cv">Choose file</label>
+                                </div>
+                                @if($errors->has('cv'))
+                                <span class="text-danger"><small>{{$errors->first('cv')}}</small></span>
+                                @endif
+                            </div>
+                        </div>
+
+                        <div class="col-sm-2">
+                            <div class="form-group">
+                                <button type="submit" class="btn btn-primary btn-block"><b>Submit</b></button>
+                            </div>
+                        </div>
+                        <div class="col-sm-2">
+                            <div class="form-group">
+                            <a href="{{ route('qualifications.show', $user->id) }}" class="btn btn-primary btn-block" >Qualification</a>
+        
+                            </div>
+                        </div>
                 </form>
+
             </div>
             <!-- /.card-body -->
         </div>
     </div>
+</section>
     <!-- /.card-body -->
 </div>
 

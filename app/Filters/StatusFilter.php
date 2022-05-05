@@ -4,10 +4,10 @@
 
 namespace App\Filters;
 
-class TypeFilter
+class StatusFilter
 {
     public function filter($builder, $value)
     {
-        return $builder->where('type', $value);
+        return $builder->where('status' ,$value);
     }
 }

@@ -13,18 +13,31 @@
             @csrf
 
             <!-- Name -->
-            <div>
+            <div  class="row">
                 <x-label for="name" :value="__('Name')" />
 
                 <x-input id="name" class="block mt-1 w-full" type="text" name="name" :value="old('name')" required autofocus  />
+            </div>
+            <!-- Email Address -->
+            <div class="mt-4">
+                <x-label for="email" :value="__('Email')" />
+
+                <x-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required />
             </div>
 
             <!-- Phone -->
             <div class="mt-4">
                 <x-label for="phone" :value="__('Phone')" />
 
-                <x-input id="phone" class="block mt-1 w-full" type="text" name="phone" :value="old('phone')" required autofocus placeholder="973 xxxx xxxx"/>
+                <x-input id="phone" class="block mt-1 w-full" type="text" name="phone" :value="old('phone')" required autofocus/>
             </div>
+            <!-- Birthday -->
+            <div class="mt-4">
+                <x-label for="birthday" :value="__('Birthday')" />
+
+                <x-input id="birthday" class="block mt-1 w-full" type="date" name="birthday" :value="old('birthday')" required autofocus/>
+            </div>
+            
             <!-- City -->
             <div class="mt-4">
                 <x-label for="city" :value="__('City')" />
@@ -32,12 +45,7 @@
                 <x-input id="city" class="block mt-1 w-full" type="text" name="city" :value="old('city')" required autofocus />
             </div>
 
-            <!-- Email Address -->
-            <div class="mt-4">
-                <x-label for="email" :value="__('Email')" />
-
-                <x-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required />
-            </div>
+            
 
             <!-- Password -->
             <div class="mt-4">

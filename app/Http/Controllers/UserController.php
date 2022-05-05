@@ -50,10 +50,9 @@ class UserController extends Controller
       
         $validated = $request->validate( [
             'name' => 'required',
-            'city' => 'required',
             'email' => 'required|email|unique:users,email',
             'password' => 'required|min:8',
-            'phone' => 'required|regex:/^([9])([7])([3])([0-9\s\-\+\(\)]*)$/',
+            'phone' => 'required',
         ]);
 
         $input = $request->all();
@@ -62,7 +61,7 @@ class UserController extends Controller
         if ($request->hasFile('image'))
             $input['image'] = $this->imageUpload($request['image'], "user");
         
-            
+             
   
         $user = User::create($input);
         $user->assignRole($request->input('role'));
@@ -95,12 +94,12 @@ class UserController extends Controller
         
         $this->validate($request, [
             'name' => 'required',
-            'city' => 'required',
             'email' => 'required|email|unique:users,email,'.$id,
-            'phone' => 'required|regex:/^([9])([7])([3])([0-9\s\-\+\(\)]*)$/',
+            'phone' => 'required',
         ]);
     
         $input = $request->all();
+        
         if(!empty($input['password'])){ 
             $input['password'] = Hash::make($input['password']);
         }else{
@@ -109,6 +108,9 @@ class UserController extends Controller
         
         if ($request->hasFile('image'))
             $input['image'] = $this->imageUpload($request['image'], "user");
+        
+        if ($request->hasFile('cv'))
+            $input['cv'] = $this->imageUpload($request['cv'], "user");
     
         $user = User::find($id);
         $user->update($input);

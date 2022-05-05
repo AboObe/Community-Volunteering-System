@@ -35,7 +35,7 @@ class CreateAdminUserSeeder extends Seeder
 
         //Normal User
         $role = Role::create(['name' => 'Normal']);
-        $normal_permissions = ["5","9","10","11","12","15"];
+        $normal_permissions = ["5","9","13","19"];
         $role->syncPermissions($normal_permissions);
     }
 }

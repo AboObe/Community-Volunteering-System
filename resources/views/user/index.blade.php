@@ -1,4 +1,4 @@
-@extends('layouts.finder_app')
+@extends('layouts.community_volunteering_app')
 @section('content')
 <section class="content-header">
     <div class="container-fluid">
